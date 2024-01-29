@@ -1,18 +1,19 @@
 import {getForm} from './utility.js'
 export {readObj, postObj,deleteObj, putObj, postAllObj,deleteAllObj};
-import { arcadeGames,tokenKey } from './array.js';
+import { arcadeGames,tokenKey,urlAPI } from './array.js';
 import { createCard } from '../main/components.js';
 
 
 const readObj = async () => {
     
-    let url = 'https://striveschool-api.herokuapp.com/api/product/'
+    let url = urlAPI
+    let key = tokenKey
     let params = new URLSearchParams(document.location.search)
     let idURL = params.get('id') 
 
     url = idURL ? url + idURL : url;
 
-    let key = tokenKey
+    
     let  options = {
         method: "GET",
         headers: {
@@ -36,7 +37,7 @@ const readObj = async () => {
 };
 
 const postObj = async (data) => {
-    const url = 'https://striveschool-api.herokuapp.com/api/product/'
+    const url = urlAPI
     let key = tokenKey
     let form = getForm()
     //form = data
@@ -65,7 +66,7 @@ const postObj = async (data) => {
 };
 
 const deleteObj = async () => {
-    let url = 'https://striveschool-api.herokuapp.com/api/product/'
+    let url = urlAPI
     let key = tokenKey
     
     let params = new URLSearchParams(document.location.search)
@@ -100,7 +101,7 @@ const deleteObj = async () => {
 };
 const putObj = async (event,id) => {
 
-    let url = 'https://striveschool-api.herokuapp.com/api/product/'
+    let url = urlAPI
     let params = new URLSearchParams(document.location.search)
     let idURL = params.get('id')
     

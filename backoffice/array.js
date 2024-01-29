@@ -1,4 +1,4 @@
-export {arcadeGames, tokenKey};
+export {arcadeGames, tokenKey, urlAPI};
 
 let arcadeGames = [{
     name: "Metal slug - Metaru Suraggu",
@@ -85,4 +85,5 @@ let arcadeGames = [{
     price:'3.59',
 }];
 
+let urlAPI = 'https://striveschool-api.herokuapp.com/api/product/'
 let tokenKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWIzYjQzNjMxYTczZjAwMTlkNWM5MDEiLCJpYXQiOjE3MDYzNzU4NTUsImV4cCI6MTcwNzU4NTQ1NX0.OtlbpNVCuThrV9PyoWpru2Gjg95YP8d2I9Vr7twWs_w'
