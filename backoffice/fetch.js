@@ -1,12 +1,18 @@
-import {getForm, getElementById} from './utility.js'
-export {readObj, postObj,deleteObj, postAllObj,deleteAllObj};
-import { arcadeGames } from './array.js';
+import {getForm} from './utility.js'
+export {readObj, postObj,deleteObj, putObj, postAllObj,deleteAllObj};
+import { arcadeGames,tokenKey } from './array.js';
+import { createCard } from '../main/components.js';
 
-const readObj = async (id) => {
+
+const readObj = async () => {
     
-    let url = ''
-    id ? url = `https://striveschool-api.herokuapp.com/api/product/${id}` : url = `https://striveschool-api.herokuapp.com/api/product/`
-    let key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWIzYjQzNjMxYTczZjAwMTlkNWM5MDEiLCJpYXQiOjE3MDYzNzU4NTUsImV4cCI6MTcwNzU4NTQ1NX0.OtlbpNVCuThrV9PyoWpru2Gjg95YP8d2I9Vr7twWs_w'
+    let url = 'https://striveschool-api.herokuapp.com/api/product/'
+    let params = new URLSearchParams(document.location.search)
+    let idURL = params.get('id') 
+
+    url = idURL ? url + idURL : url;
+
+    let key = tokenKey
     let  options = {
         method: "GET",
         headers: {
@@ -31,9 +37,9 @@ const readObj = async (id) => {
 
 const postObj = async (data) => {
     const url = 'https://striveschool-api.herokuapp.com/api/product/'
-    let key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWIzYjQzNjMxYTczZjAwMTlkNWM5MDEiLCJpYXQiOjE3MDYzNzU4NTUsImV4cCI6MTcwNzU4NTQ1NX0.OtlbpNVCuThrV9PyoWpru2Gjg95YP8d2I9Vr7twWs_w'
+    let key = tokenKey
     let form = getForm()
-    form = data
+    //form = data
     let  options = {
         method: "POST",
         headers: {
@@ -48,6 +54,7 @@ const postObj = async (data) => {
 
                 console.log('Request successfully done');
                 let data = await resp.json()
+                window.alert('POSTATA')
                 return data
 
             } else {
@@ -57,11 +64,14 @@ const postObj = async (data) => {
         catch(error) {console.log('errore: '+ error)};
 };
 
-const deleteObj = async (id) => {
-    const url = 'https://striveschool-api.herokuapp.com/api/product/'
-    let key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWIzYjQzNjMxYTczZjAwMTlkNWM5MDEiLCJpYXQiOjE3MDYzNzU4NTUsImV4cCI6MTcwNzU4NTQ1NX0.OtlbpNVCuThrV9PyoWpru2Gjg95YP8d2I9Vr7twWs_w'
-    let idResource = getElementById('idResource').value;
-    idResource ? null : idResource = id
+const deleteObj = async () => {
+    let url = 'https://striveschool-api.herokuapp.com/api/product/'
+    let key = tokenKey
+    
+    let params = new URLSearchParams(document.location.search)
+    let idURL = params.get('id')
+
+    url = url + idURL
 
     let  options = {
         method: "DELETE",
@@ -71,12 +81,15 @@ const deleteObj = async (id) => {
                 },
         }
         try{
-            let resp = await fetch(url+idResource,options)
+            let resp = await fetch(url,options)
             if (resp.status >= 200 && resp.status < 300){
                 
                 console.log('Request successfully done');
                 let data = await resp.json()
-                console.log(data);
+                //console.log(data);
+                params.set('id','');
+                window.location.search = params.toString();
+                window.alert('Eliminata')
                 return data
 
             } else {
@@ -85,6 +98,41 @@ const deleteObj = async (id) => {
         }
         catch(error) {console.log(error);}
 };
+const putObj = async (event,id) => {
+
+    let url = 'https://striveschool-api.herokuapp.com/api/product/'
+    let params = new URLSearchParams(document.location.search)
+    let idURL = params.get('id')
+    
+    url = id ? url + id : url + idURL;
+
+    let key = tokenKey
+    let data = getForm();
+    let  options = {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${key}`
+                },
+        body: JSON.stringify(data),
+        }
+        try{
+            let resp = await fetch(url, options)
+            if (resp.status >= 200 && resp.status < 300){
+                
+                console.log('Request successfully done');
+                let data = await resp.json()
+                location.reload();
+                window.alert('Modificata')
+                return data
+
+            } else {
+                throw new Error('Something wrong');
+            }
+        }
+        catch(error) {console.log(error);}
+
+}
 const postAllObj =  () => {
     //const url = 'https://striveschool-api.herokuapp.com/api/product/'
   //  let key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWIzYjQzNjMxYTczZjAwMTlkNWM5MDEiLCJpYXQiOjE3MDYzNzU4NTUsImV4cCI6MTcwNzU4NTQ1NX0.OtlbpNVCuThrV9PyoWpru2Gjg95YP8d2I9Vr7twWs_w'

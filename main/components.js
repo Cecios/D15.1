@@ -2,6 +2,7 @@ export {createCard};
 
 const createCard = (post) => {
 
+
     var row = document.getElementById("row-card");
     var col = document.createElement("div");
     col.className = "col-6 col-md-4 col-lg-3";
@@ -26,7 +27,7 @@ const createCard = (post) => {
     cardText.textContent = `${post.description}`;
     var cardPrice = document.createElement("p");
     cardPrice.className = "card-text";
-    cardPrice.textContent = `Price: ${post.price}`;
+    cardPrice.textContent = `Price: ${post.price} $`;
     
 
     cardBody.appendChild(cardTitle);

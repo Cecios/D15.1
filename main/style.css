@@ -8,4 +8,6 @@ button,input{
 nav{
     font-family: 'Honk', system-ui, sans-serif;
 }
-
+.card:hover{
+    scale: 1.1;
+}

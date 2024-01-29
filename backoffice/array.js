@@ -1,4 +1,4 @@
-export {arcadeGames};
+export {arcadeGames, tokenKey};
 
 let arcadeGames = [{
     name: "Metal slug - Metaru Suraggu",
@@ -84,3 +84,5 @@ let arcadeGames = [{
     imageUrl:'https://upload.wikimedia.org/wikipedia/en/a/a0/Nbajam.jpg',
     price:'3.59',
 }];
+
+let tokenKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWIzYjQzNjMxYTczZjAwMTlkNWM5MDEiLCJpYXQiOjE3MDYzNzU4NTUsImV4cCI6MTcwNzU4NTQ1NX0.OtlbpNVCuThrV9PyoWpru2Gjg95YP8d2I9Vr7twWs_w'
